@@ -1,0 +1,113 @@
+{{template "header"}}
+{{template "navbar"}}
+<body ontouchstart>
+    <div class="container" id="container"></div>
+
+<div class="page">
+
+    <div class="page__bd">
+        
+        <div class="weui-cells__title">出猪管理：</div>
+        <div class="weui-cells weui-cells_form">
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">母猪耳号</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="number" pattern="[0-9]*" name="" placeholder="请输入耳号"/>
+                </div>
+            </div>
+
+            <div class="weui-cell weui-cell_select weui-cell_select-after">
+                <div class="weui-cell__hd">
+                    <label for="" class="weui-label">出猪类型</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <select class="weui-select" name="select2">
+                        <option value="1">仔猪</option>
+                        <option value="2">母猪</option>
+                        <option value="3">公猪</option>
+                    </select>
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">数量</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="number" pattern="[0-9]*" name="" placeholder="请输入出猪数"/>
+                </div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label for="" class="weui-label">日期</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="date" value=""/>
+                </div>
+            </div>
+         </div>
+
+        <div class="weui-form-preview">
+            <div class="weui-form-preview__hd">
+             <label class="weui-form-preview__label">母猪信息</label>
+             <em class="weui-form-preview__value">¥2400.00</em>
+            </div>
+        <div class="weui-form-preview__bd">
+            <p>
+                <label class="weui-form-preview__label">日龄</label>
+                <span class="weui-form-preview__value">{{.woshu}}</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">品种</label>
+                <span class="weui-form-preview__value">大长白</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">区域</label>
+                <span class="weui-form-preview__value">{{.woshu}}</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">栏位</label>
+                <span class="weui-form-preview__value">{{.woshu}}</span>
+            </p>
+        </div>
+       </div>
+
+        <div class="weui-cells__title">备注</div>
+        <div class="weui-cells">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" placeholder="请输入备注"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="weui-btn-area">
+            <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips" type="submit">确定</a>
+        </div>
+
+    </div>
+    <div class="page__ft">
+        <a href="javascript:home()"><img src="/static/images/icon_footer_link.png" /></a>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function(){
+        var $tooltips = $('.js_tooltips');
+
+        $('#showTooltips').on('click', function(){
+        //    if ($tooltips.css('display') != 'none') return;
+
+            // toptips的fixed, 如果有`animation`, `position: fixed`不生效
+            $('.page.cell').removeClass('slideIn');
+
+            $tooltips.css('display', 'block');
+            setTimeout(function () {
+                $tooltips.css('display', 'none');
+            }, 2000);
+        });
+    });
+</script>
+   
+
+    <script type="text/javascript" src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    
+    <script type="text/javascript" src="/static/js/weui.min.js"></script>
+    <script src="/static/js/weui.js"></script>
+</body>
+</html>

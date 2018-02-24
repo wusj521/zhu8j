@@ -1,0 +1,204 @@
+{{template "header"}}
+{{template "navbar"}}
+<body ontouchstart onload="nowdate()">
+    <div class="container" id="container"></div>
+
+<div class="page">
+    <form method="post" action="/pigletout">
+    <div class="page__bd">
+        <div class="weui-cells__title">出猪管理：</div>
+        <div class="weui-cells weui-cells_form">
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">母猪耳号</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="number" pattern="[0-9]*" name="" placeholder="请输入耳号"/>
+                </div>
+            </div>
+
+            <div class="weui-cell weui-cell_select weui-cell_select-after">
+                <div class="weui-cell__hd">
+                    <label for="" class="weui-label">出猪类型</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <select class="weui-select" name="select2">
+                        <option value="1">仔猪</option>
+                        <option value="2">母猪</option>
+                        <option value="3">公猪</option>
+                    </select>
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">数量</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="number" pattern="[0-9]*" name="" placeholder="请输入出猪数"/>
+                </div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label for="" class="weui-label">日期</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="date" value="" name="date" id="mydate"/>
+                </div>
+            </div>
+         </div>
+         <div class="weui-btn-area">
+            <button type="submit" class="weui-btn weui-btn_primary" href="javascript:" id="topTipsBtn">确定保存</button>
+        </div>
+        </div>
+        </form>
+
+        <form method="post" action="/pigletout">
+        <div class="page__bd">
+        <div class="weui-form-preview">
+            <div class="weui-form-preview__hd">
+             <label class="weui-form-preview__label">母猪信息</label>
+             <em class="weui-form-preview__value">¥2400.00</em>
+            </div>
+        <div class="weui-form-preview__bd">
+            <p>
+                <label class="weui-form-preview__label">日龄</label>
+                <span class="weui-form-preview__value">电动打蛋机</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">窝数</label>
+                <span class="weui-form-preview__value">{{.woshu}}</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">区域</label>
+                <span class="weui-form-preview__value">{{.woshu}}</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">栏位</label>
+                <span class="weui-form-preview__value">{{.woshu}}</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">品种</label>
+                <span class="weui-form-preview__value">{{.woshu}}</span>
+            </p>
+
+        </div>
+        <div class="weui-form-preview__ft">
+            <a class="weui-form-preview__btn weui-form-preview__btn_default" href="/sowview">查看更多</a>
+            <a href="javascript:;" class="weui-form-preview__btn weui-form-preview__btn_primary" id="showIOSDialog1">删除操作</a>
+        </div>
+
+        <div id="dialogs">
+        <!--BEGIN dialog1-->
+        <div class="js_dialog" id="iosDialog1" style="display: none;">
+            <div class="weui-mask"></div>
+            <div class="weui-dialog">
+                <div class="weui-dialog__hd"><strong class="weui-dialog__title">弹窗标题</strong></div>
+                <div class="weui-dialog__bd">弹窗内容，告知当前状态、信息和解决方法，描述文字尽量控制在三行内</div>
+                <div class="weui-dialog__ft">
+                    <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_default">取消操作</a>
+                    <button type="submit" class="weui-dialog__btn weui-dialog__btn_primary">确定删除</button>
+                </div>
+            </div>
+        </div>
+        <!--END dialog1--> 
+        </div>
+
+       </div>
+       <br>
+       
+        </div>
+     </form>
+    
+    <div class="page__ft">
+        <a href="javascript:home()"><img src="/static/images/icon_footer_link.png" /></a>
+    </div>
+   
+</div>
+
+<script type="text/javascript">//按钮的弹出提示JS
+    $(function(){
+        var $tooltips = $('.js_tooltips');
+
+        $('#topTipsBtn').on('click', function(){
+            if ($tooltips.css('display') != 'none') return;
+            weui.toast('操作成功', 3000);
+            weui.toast('操作成功', {
+            duration: 3000,
+            className: 'weui-btn-area',
+            callback: function(){ console.log('close') }
+        });
+            // toptips的fixed, 如果有`animation`, `position: fixed`不生效
+            $('.page.cell').removeClass('slideIn');
+
+            $tooltips.css('display', 'block');
+            setTimeout(function () {
+                $tooltips.css('display', 'none');
+            }, 2000);
+        });
+    });
+</script>
+<script type="text/javascript">//确认按钮JS
+    $(function(){
+        var $iosDialog1 = $('#iosDialog1');
+            
+        $('#dialogs').on('click', '.weui-dialog__btn', function(){
+            $(this).parents('.js_dialog').fadeOut(200);
+        });
+
+        $('#showIOSDialog1').on('click', function(){
+            $iosDialog1.fadeIn(200);
+        });
+    });
+</script>
+<script type="text/javascript">//返回主页JS
+    function home() {
+        window.location.href = "/";
+            return false;
+                        }
+</script>
+<script type="text/javascript">//默认当前日期JS
+    function nowdate(){
+        var mydateInput = document.getElementById("mydate");
+        var date = new Date();
+        mydateInput.value = getNowFormatDate();
+        
+        //var dateString = date.getFullYear()+"/"+(date.getMonth()+1)+"/"+date.getDate();
+        //mydateInput.value=dateString;
+    }
+
+    function getNowFormatDate()// 默认日期的月和日添加前导零JS
+        { 
+           var day = new Date(); 
+           var Year = 0; 
+           var Month = 0; 
+           var Day = 0; 
+           var CurrentDate = ""; 
+           //初始化时间 
+           //Year       = day.getYear();//有火狐下2008年显示108的bug 
+           Year       = day.getFullYear();//ie火狐下都可以 
+           Month      = day.getMonth()+1; 
+           Day        = day.getDate(); 
+           CurrentDate += Year + "-"; 
+           if (Month >= 10 ) 
+           { 
+            CurrentDate += Month + "-"; 
+           } 
+           else
+           { 
+            CurrentDate += "0" + Month + "-"; 
+           } 
+           if (Day >= 10 ) 
+           { 
+            CurrentDate += Day ; 
+           } 
+           else
+           { 
+            CurrentDate += "0" + Day ; 
+           } 
+
+           return CurrentDate; 
+        }
+
+</script>
+
+    <script type="text/javascript" src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    
+    <script type="text/javascript" src="/static/js/weui.min.js"></script>
+    <script src="/static/js/weui.js"></script>
+</body>
+</html>
